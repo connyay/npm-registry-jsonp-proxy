@@ -17,7 +17,7 @@ http.createServer(function(req, res) {
         res.write('npm registry jsonp proxy\n\n');
         res.write('Usage:\n');
         res.write('\tpath: The path to access, (required).\n');
-        res.write('\tcallback: The function name to use for the JSON response. Default is "callback".\n');
+        res.write('\tcallback: The function name to use for the JSON response.\n');
         return res.end();
     }
     function sendFailBoat() {
@@ -29,13 +29,16 @@ http.createServer(function(req, res) {
         return res.end();
     }
     function sendJSONP(data) {
-        var callback = params.callback || 'callback';
-        var isCors = params.cors && params.cors === 'true';
-        res.writeHead(200, {
+        var callback = params.callback;
+        var headers = {
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/javascript'
-        });
-        var body = isCors ? data : callback + '(' + data + ')';
+            'Content-Type': 'application/json'
+        };
+        if(callback) {
+            headers['Content-Type'] = 'application/javascript';
+        }
+        res.writeHead(200, headers);
+        var body = callback ? callback + '(' + data + ')' : data;
         res.write(body);
         return res.end();
     }
