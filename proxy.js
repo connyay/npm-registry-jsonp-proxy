@@ -28,13 +28,15 @@ http.createServer(function(req, res) {
         res.write('Whoops. Something failed');
         return res.end();
     }
-    function sendJSONP(body) {
+    function sendJSONP(data) {
         var callback = params.callback || 'callback';
+        var isCors = params.cors && params.cors === 'true';
         res.writeHead(200, {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/javascript'
         });
-        res.write(callback + '(' + body + ')');
+        var body = isCors ? data : callback + '(' + data + ')';
+        res.write(body);
         return res.end();
     }
     if (!params.path) {
