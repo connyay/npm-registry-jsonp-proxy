@@ -1,0 +1,22 @@
+{
+  "name": "npm-registry-jsonp-proxy",
+  "version": "0.0.1",
+  "description": "npm-registry-jsonp-proxy ========================",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/connyay/npm-registry-jsonp-proxy.git"
+  },
+  "author": "https://github.com/connyay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/connyay/npm-registry-jsonp-proxy/issues"
+  },
+  "homepage": "https://github.com/connyay/npm-registry-jsonp-proxy",
+  "dependencies": {
+    "request": "^2.42.0"
+  }
+}
